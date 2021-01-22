@@ -2,7 +2,7 @@
 ```
 which mysql
 ```
-出てきたpathに応じてdocker-compose.ymlのdb/volumeを/usr/local/bin/から適宜書き換えてください
+出てきたpathに応じてdocker-compose.ymlのdb/volumeを/usr/local/bin/mysqlから適宜書き換えてください
 以下のコマンドをdocker-compose.ymlがあるところで叩いてください
 ```
 docker-compose run web 
