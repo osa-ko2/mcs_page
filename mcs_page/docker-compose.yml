@@ -1,0 +1,26 @@
+version: '3'       # 1
+services:          # 2
+  db:
+    container_name: django-docker-db
+    image: mysql:5.7    # 3
+    environment:                  # 4
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: django-db
+      MYSQL_USER: django
+      MYSQL_PASSWORD: django
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/usr/local/bin/mysql # which mysqlでmysqlの位置を要確認
+  web:
+    container_name: django-docker
+    build: .       # 6
+    command: python3 manage.py runserver 0.0.0.0:8000 # 7
+    volumes:                  # 8
+      - .:/code
+    ports:                    # 9
+      - "8000:8000"
+    depends_on:               # 10
+      - db
